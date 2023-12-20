@@ -1,5 +1,12 @@
 require('gruvbox').setup({
-    disable_background = true
+    contrast = "soft",
+    italic = {
+        strings = false,
+        emphasis = true,
+        comments = false,
+        operators = false,
+        folds = true,
+    },
 })
 
 function ColorMyPencils(color)
