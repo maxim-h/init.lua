@@ -1,8 +1,9 @@
 return {
     {
-        'nvim-telescope/telescope.nvim', version = '0.1.0',
-        -- or                            , branch = '0.1.x',
-        dependencies = { {'nvim-lua/plenary.nvim'} }
+        'nvim-telescope/telescope.nvim',
+        --version = '0.1.*',
+        branch = '0.1.x',
+        dependencies = { 'nvim-lua/plenary.nvim' }
     },
 
     {
@@ -50,7 +51,7 @@ return {
 
         {
             'VonHeikemen/lsp-zero.nvim',
-            branch = 'v1.x',
+            branch = 'v3.x',
             dependencies = {
                 -- LSP Support
                 {'neovim/nvim-lspconfig'},
@@ -71,8 +72,13 @@ return {
             }
         },
 
-        {"folke/zen-mode.nvim"},
-        {"github/copilot.vim"},
+        {
+            "folke/zen-mode.nvim",
+            dependencies = {
+                {"folke/twilight.nvim"},
+            }
+        },
+        -- {"github/copilot.vim"},
         {"eandrju/cellular-automaton.nvim"},
         {"laytan/cloak.nvim"},
     }

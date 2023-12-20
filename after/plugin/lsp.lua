@@ -2,13 +2,14 @@ local lsp = require("lsp-zero")
 
 lsp.preset("recommended")
 
-lsp.ensure_installed({
-  'tsserver',
-  'rust_analyzer',
-})
+--lsp.ensure_installed({
+--  'tsserver',
+--  'rust_analyzer',
+--})
 
 -- Fix Undefined global 'vim'
-lsp.nvim_workspace()
+local lua_opts = lsp.nvim_lua_ls()
+require('lspconfig').lua_ls.setup(lua_opts)
 
 
 local cmp = require('cmp')
@@ -23,9 +24,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 cmp_mappings['<Tab>'] = nil
 cmp_mappings['<S-Tab>'] = nil
 
-lsp.setup_nvim_cmp({
-  mapping = cmp_mappings
-})
+cmp.setup({mapping = cmp_mappings})
 
 lsp.set_preferences({
     suggest_lsp_servers = false,
