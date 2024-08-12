@@ -16,19 +16,22 @@ return {
         opts = ...
     },
 
---    {
---        'rose-pine/neovim',
---        name = 'rose-pine',
---        config = function()
---            vim.cmd('colorscheme rose-pine')
---        end
---    },
+    {
+        'rose-pine/neovim',
+        name = 'rose-pine',
+        config = function()
+            vim.cmd('colorscheme rose-pine')
+        end
+    },
 
     {
         "folke/trouble.nvim",
+        dependencies = {
+            {'nvim-tree/nvim-web-devicons'},
+        },
         config = function()
             require("trouble").setup {
-                icons = false,
+                icons = true,
                 -- your configuration comes here
                 -- or leave it empty to {the default settings},
                 -- refer to the configuration section below
@@ -47,7 +50,19 @@ return {
         {"theprimeagen/refactoring.nvim"},
         {"mbbill/undotree"},
         {"tpope/vim-fugitive"},
-        {"nvim-treesitter/nvim-treesitter-context"},
+        {"lewis6991/gitsigns.nvim", confing = function ()
+            require('gitsigns').setup()
+        end},
+        {
+            "nvim-treesitter/nvim-treesitter-context",
+            config = function ()
+                require('treesitter-context').setup {
+                    max_lines = 4,
+                    trim_scope = 'inner',
+                    separator= '$',
+                }
+            end
+        },
 
         {
             'VonHeikemen/lsp-zero.nvim',
@@ -78,7 +93,27 @@ return {
                 {"folke/twilight.nvim"},
             }
         },
-        -- {"github/copilot.vim"},
+        {"github/copilot.vim"},
+        { "CopilotC-Nvim/CopilotChat.nvim",
+            branch = "canary",
+            dependencies = {
+                { "github/copilot.vim" }, -- or github/copilot.vim
+                { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+            },
+            opts = {
+                debug = true, -- Enable debugging
+            },
+        },
         {"eandrju/cellular-automaton.nvim"},
         {"laytan/cloak.nvim"},
+        {
+            "norcalli/nvim-colorizer.lua"
+        },
+        {
+            'snakemake/snakemake',
+            config = function(plugin)
+                vim.opt.rtp:append(plugin.dir .. "/misc/vim")
+            end,
+            ft = 'snakemake'
+        },
     }

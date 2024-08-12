@@ -27,8 +27,8 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
-vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
+--vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
+--vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
@@ -43,7 +43,10 @@ vim.keymap.set("n", "<leader><leader>", function()
 end)
 
 -- window splits
-vim.keymap.set("n", "<M-h>" , "<C-w>h")
-vim.keymap.set("n", "<M-j>" , "<C-w>j")
-vim.keymap.set("n", "<M-k>" , "<C-w>k")
-vim.keymap.set("n", "<M-l>" , "<C-w>l")
+vim.keymap.set("n", "<C-h>" , "<C-w>h")
+vim.keymap.set("n", "<C-j>" , "<C-w>j")
+vim.keymap.set("n", "<C-k>" , "<C-w>k")
+vim.keymap.set("n", "<C-l>" , "<C-w>l")
+
+-- spellcheck
+vim.keymap.set("n", "<leader>o", "<cmd>setlocal spell! spelllang=en_us<CR>")

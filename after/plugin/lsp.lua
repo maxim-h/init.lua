@@ -2,14 +2,21 @@ local lsp = require("lsp-zero")
 
 lsp.preset("recommended")
 
---lsp.ensure_installed({
---  'tsserver',
---  'rust_analyzer',
---})
+require('mason').setup()
+require('mason-lspconfig').setup({
+  ensure_installed = {'rust_analyzer', 'lua_ls'},
+  handlers = {
+      lsp.default_setup,
+      lua_ls = function()
+          local lua_opts = lsp.nvim_lua_ls()
+          require('lspconfig').lua_ls.setup(lua_opts)
+      end,
+  }
+})
 
 -- Fix Undefined global 'vim'
-local lua_opts = lsp.nvim_lua_ls()
-require('lspconfig').lua_ls.setup(lua_opts)
+--local lua_opts = lsp.nvim_lua_ls()
+-- require('lspconfig').lua_ls.setup(lua_opts)
 
 
 local cmp = require('cmp')
@@ -35,6 +42,7 @@ lsp.set_preferences({
 --        info = 'I'
 --    }
 })
+
 
 lsp.on_attach(function(client, bufnr)
   local opts = {buffer = bufnr, remap = false}
