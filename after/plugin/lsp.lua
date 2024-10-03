@@ -4,7 +4,7 @@ lsp.preset("recommended")
 
 require('mason').setup()
 require('mason-lspconfig').setup({
-  ensure_installed = {'rust_analyzer', 'lua_ls'},
+  ensure_installed = {'rust_analyzer', 'lua_ls', 'r_language_server'},
   handlers = {
       lsp.default_setup,
       lua_ls = function()
@@ -43,6 +43,11 @@ lsp.set_preferences({
 --    }
 })
 
+local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
 
 lsp.on_attach(function(client, bufnr)
   local opts = {buffer = bufnr, remap = false}
