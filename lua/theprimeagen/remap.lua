@@ -50,3 +50,9 @@ vim.keymap.set("n", "<C-l>" , "<C-w>l")
 
 -- spellcheck
 vim.keymap.set("n", "<leader>o", "<cmd>setlocal spell! spelllang=en_us<CR>")
+
+
+-- Compile mode stuff
+vim.keymap.set("n", "<C-c>", "<cmd>Compile<CR>")
+vim.keymap.set("n", "<C-n>", "<cmd>NextError<CR>")
+vim.keymap.set("n", "<C-p>", "<cmd>PrevError<CR>")
