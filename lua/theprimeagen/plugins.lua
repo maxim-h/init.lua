@@ -15,51 +15,44 @@ return {
         end,
         opts = ...
     },
-
-    {
-        'rose-pine/neovim',
-        name = 'rose-pine',
-        config = function()
-            vim.cmd('colorscheme rose-pine')
-        end
-    },
-
-    {
-        "folke/trouble.nvim",
-        dependencies = {
-            {'nvim-tree/nvim-web-devicons'},
-        },
-        -- config = function()
-        --     require("trouble").setup {
-        --         icons = true,
-        --         -- your configuration comes here
-        --         -- or leave it empty to {the default settings},
-        --         -- refer to the configuration section below
-        --     }
-        -- end
-    },
-    {
-        "folke/which-key.nvim",
-        event = "VeryLazy",
-        opts = {
-            -- your configuration comes here
-            -- or leave it empty to use the default settings
-            -- refer to the configuration section below
-        },
-        keys = {
-            {
-                "<leader>?",
-                function()
-                    require("which-key").show({ global = false })
-                end,
-                desc = "Buffer Local Keymaps (which-key)",
-            },
-        },
-    },
+    -- {
+    --     "folke/trouble.nvim",
+    --     dependencies = {
+    --         {'nvim-tree/nvim-web-devicons'},
+    --     },
+    --     -- config = function()
+    --     --     require("trouble").setup {
+    --     --         icons = true,
+    --     --         -- your configuration comes here
+    --     --         -- or leave it empty to {the default settings},
+    --     --         -- refer to the configuration section below
+    --     --     }
+    --     -- end
+    -- },
+    -- {
+    --     "folke/which-key.nvim",
+    --     event = "VeryLazy",
+    --     opts = {
+    --         -- your configuration comes here
+    --         -- or leave it empty to use the default settings
+    --         -- refer to the configuration section below
+    --     },
+    --     keys = {
+    --         {
+    --             "<leader>?",
+    --             function()
+    --                 require("which-key").show({ global = false })
+    --             end,
+    --             desc = "Buffer Local Keymaps (which-key)",
+    --         },
+    --     },
+    -- },
     {
         "tpope/vim-commentary"
     },
-
+    {
+        "tpope/vim-surround"
+    },
     {
         'nvim-treesitter/nvim-treesitter',
         build = function()
@@ -68,7 +61,7 @@ return {
         end,},
         {"nvim-treesitter/playground"},
         {"theprimeagen/harpoon"},
-        {"theprimeagen/refactoring.nvim"},
+        -- {"theprimeagen/refactoring.nvim"},
         {"mbbill/undotree"},
         {"tpope/vim-fugitive"},
         {"lewis6991/gitsigns.nvim", confing = function ()
@@ -112,7 +105,10 @@ return {
             {'hrsh7th/cmp-nvim-lua'},
 
             -- Snippets
-            {'L3MON4D3/LuaSnip'},
+            {
+                'L3MON4D3/LuaSnip',
+                version = "v2.*",
+            },
             {'rafamadriz/friendly-snippets'},
         }
     },
@@ -136,10 +132,10 @@ return {
         -- },
         {'rcarriga/nvim-notify'},
         {"eandrju/cellular-automaton.nvim"},
-        {"laytan/cloak.nvim"},
-        {
-            "norcalli/nvim-colorizer.lua"
-        },
+        -- {"laytan/cloak.nvim"},
+        -- {
+        --     "norcalli/nvim-colorizer.lua"
+        -- },
         {
             'snakemake/snakemake',
             config = function(plugin)
@@ -203,10 +199,10 @@ return {
 
                 },
             },
-            {
-                "vapourlang/vapour-nvim",
-                config = function()
-                    require("vapour").setup()
-                end
-            },
+            -- {
+            --     "vapourlang/vapour-nvim",
+            --     config = function()
+            --         require("vapour").setup()
+            --     end
+            -- },
     }
