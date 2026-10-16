@@ -2,6 +2,7 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
+        branch = "main",
 		lazy = false,
 		init = function()
 			local parsers = {
@@ -17,6 +18,13 @@ return {
 				"json",
 				"gitignore",
 				"go",
+				"python",
+				"r",
+				"markdown",
+				"rnoweb",
+				"yaml",
+				"csv",
+				"latex",
 			}
 
 			local group = vim.api.nvim_create_augroup("ThePrimeagenTreesitter", { clear = true })
@@ -36,7 +44,16 @@ return {
 				pattern = "VeryLazy",
 				once = true,
 				callback = function()
-					require("nvim-treesitter").install(parsers)
+                    require('nvim-treesitter').setup({
+                        ensure_installed = {
+                            "lua", "vim", "vimdoc", "javascript", "typescript",
+				            "r", "markdown", "rnoweb", "yaml", "csv", "latex"
+                            -- Add any other languages you need
+                        },
+                        auto_install = true,  -- Automatically install missing parsers
+                        highlight = { enable = true },
+                        indent = { enable = true },
+                    })
 				end,
 			})
 		end,

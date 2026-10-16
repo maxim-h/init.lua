@@ -33,9 +33,7 @@ return {
             ensure_installed = {
                 "lua_ls",
                 "rust_analyzer",
-                "gopls",
-                "vtsls",
-                "tailwindcss",
+                "pyright"
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -90,13 +88,42 @@ return {
                         }
                     }
                 end,
-                ["tailwindcss"] = function()
+
+                ['r_language_server'] = function()
                     local lspconfig = require("lspconfig")
-                    lspconfig.tailwindcss.setup({
+                    lspconfig.r_language_server.setup({
                         capabilities = capabilities,
-                        filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "heex" },
+                        filetypes = { "r", "R", "rmd", "Rmd" },
+                        root_dir = lspconfig.util.root_pattern(".Rprofile", "renv.lock", ".git"),
+                        single_file_support = true,
+                        cmd = {
+                            "R",
+                            "--slave",
+                            "-e",
+                            '[[if (requireNamespace("renv", quietly = TRUE) && renv::projroot() == rprojroot::find_rstudio_root_file()) { renv::load(renv::projroot()); }; require("languageserver"); languageserver::run()]]'
+                        },
+                        on_attach = function(client, _)
+                            client.server_capabilities.documentFormattingProvider = false
+                            client.server_capabilities.documentRangeFormattingProvider = false
+                            client.server_capabilities.diagnosticProvider = false
+                        end,
                     })
                 end,
+
+                -- ['air'] = function()
+                --     vim.lsp.config['air'] = {
+                --         on_attach = function(_, bufnr)
+                --             vim.api.nvim_create_autocmd("BufWritePre", {
+                --                 buffer = bufnr,
+                --                 callback = function()
+                --                     vim.lsp.buf.format()
+                --                 end,
+                --             })
+                --         end,
+                --     }
+                --     vim.lsp.enable('air')
+                -- end,
+
             }
         })
 
@@ -118,6 +145,7 @@ return {
                 { name = "copilot", group_index = 2 },
                 { name = 'nvim_lsp' },
                 { name = 'luasnip' }, -- For luasnip users.
+                { name = 'path' },
             }, {
                 { name = 'buffer' },
             })

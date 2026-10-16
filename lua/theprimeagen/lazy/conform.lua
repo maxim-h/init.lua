@@ -16,11 +16,20 @@ return {
 				javascript = { "prettier" },
 				typescript = { "prettier" },
 				elixir = { "mix" },
+				r = { "air" },
 			},
 			formatters = {
 				["clang-format"] = {
 					prepend_args = { "-style=file", "-fallback-style=LLVM" },
 				},
+                air = {
+                    command = "air",
+                    args = {
+                        "format",
+                        "$FILENAME",
+                    },
+                    stdin = false,
+                },
 			},
 		})
 
